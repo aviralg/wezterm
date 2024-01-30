@@ -1,12 +1,22 @@
 local wezterm = require 'wezterm'
 local config = {}
 
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then 
+    default_prog = 'nu.exe'
+else
+    default_prog = 'nu'
+    config.set_environment_variables = {
+        EDITOR = 'code',
+        PATH = '/usr/local/bin:' .. (os.getenv('HOME') .. '/.cargo/bin:') .. os.getenv('PATH')
+    }
+end
+
+config.default_prog = { default_prog, "-l" }
 config.font = wezterm.font('Iosevka Nerd Font', { weight = 'Bold' })
 config.font_size = 16
-config.color_scheme = 'Google Light (base16)'
-config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+config.color_scheme = 'Modus-Operandi' --'Google Light (base16)'
+config.window_padding = {left = 10, right = 10, top = 10, bottom = 10}
 config.default_cursor_style = 'SteadyBar'
-config.default_prog = { 'nu', "-l" }
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 
@@ -50,10 +60,5 @@ config.colors = {
 }
 
 config.leader = { key = '\\', mods = 'CTRL', timeout_milliseconds = 1000 }
-
-config.set_environment_variables = {
-    EDITOR = 'code',
-    PATH = '/usr/local/bin:' .. (os.getenv('HOME') .. '/.cargo/bin:') .. os.getenv('PATH')
-}
 
 return config
