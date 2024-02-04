@@ -7,7 +7,7 @@ else
     default_prog = 'nu'
     config.set_environment_variables = {
         EDITOR = 'code',
-        PATH = '/usr/local/bin:' .. (os.getenv('HOME') .. '/.cargo/bin:') .. os.getenv('PATH')
+        PATH = '/usr/local/bin:' .. '/opt/homebrew/bin:' .. (os.getenv('HOME') .. '/.cargo/bin:') .. os.getenv('PATH')
     }
 end
 
